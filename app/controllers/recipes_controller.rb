@@ -3,11 +3,13 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = current_user.recipe
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show; end
+  def show
+    @recipe = Recipe.find(params[:id])
+  end
 
   # GET /recipes/new
   def new
@@ -17,9 +19,16 @@ class RecipesController < ApplicationController
   # GET /recipes/1/edit
   def edit; end
 
+  def make_private
+    @recipe = Recipe.find(params[:id])
+    @recipe.update_attribute(:public, !@recipe.public)
+    redirect_to recipe_path(@recipe)
+  end
+
   # POST /recipes or /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user_id = current_user.id
 
     respond_to do |format|
       if @recipe.save
@@ -27,19 +36,6 @@ class RecipesController < ApplicationController
         format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /recipes/1 or /recipes/1.json
-  def update
-    respond_to do |format|
-      if @recipe.update(recipe_params)
-        format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recipe }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
@@ -64,6 +60,6 @@ class RecipesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def recipe_params
-    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public, :user_id)
+    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
   end
 end
