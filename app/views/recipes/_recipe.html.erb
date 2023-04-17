@@ -1,9 +1,18 @@
 <div id="<%= dom_id recipe %>">
+<div>
   <p>
     <strong>Name:</strong>
     <%= recipe.name %>
   </p>
 
+  <% if current_user && recipe.user == current_user %>
+  <% if recipe.public %>
+    <%= button_to "Make Private", make_private_recipe_path(recipe), method: :put %>
+  <% else %>
+    <%= button_to "Make Public", make_private_recipe_path(recipe), method: :put %>
+  <% end %>
+<% end %>
+</div>
   <p>
     <strong>Preparation time:</strong>
     <%= recipe.preparation_time %>
@@ -25,8 +34,8 @@
   </p>
 
   <p>
-    <strong>User:</strong>
-    <%= recipe.user_id %>
+    <strong>By:</strong>
+    <%= recipe.user.name %>
   </p>
 
 </div>
