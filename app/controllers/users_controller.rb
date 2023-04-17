@@ -47,10 +47,10 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    @user.destroy
+    sign_out current_user
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to user_session_path, notice: 'The session was successfully closed.' }
       format.json { head :no_content }
     end
   end
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
   end
 
   # Only allow a list of trusted parameters through.
