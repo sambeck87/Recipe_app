@@ -1,0 +1,12 @@
+<div class="container d-flex justify-content-center w-50">
+  <h1 class="justify-content-center">Public Recipe</h1>
+  <div style="display: none">
+    <div class="d-flex flex-column gap-2">
+      <% @recipes.each do |recipe| %>
+        <div class="border">
+          <h3> <%= recipe %> </h3>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,9 @@
         <li>
           <%= link_to "Recipes", recipes_path, class: "nav-link px-2 text-white" %>
         </li>
+        <li>
+          <%= link_to "Public Recipes", public_recipe_path, class: "nav-link px-2 text-white" %>
+        </li>
       </ul>
       <div class="text-end">
         <% if user_signed_in? %>
