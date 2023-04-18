@@ -30,7 +30,10 @@
       <th scope="row"><%= food.name%></th>
       <td><%= recipe_food.quantity%><%= food.measurement_unit%></td>
       <td><%= food.price * recipe_food.quantity%></td>
-      <td>@mdo</td>
+      <td>
+      <%= button_to "Modify", recipe_recipe_foods_path(params[:id]), method: :get %>
+      <%= button_to "Remove", recipe_recipe_food_path(params[:id], recipe_food.id), method: :delete %>
+      </td>
     </tr>
 <%end%>
   </tbody>
