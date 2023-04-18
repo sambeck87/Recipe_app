@@ -11,11 +11,15 @@
   </head>
   <body>
     <%= render 'shared/header' %>
-    <div class="container">
-    <div class="alert alert-success" role="alert"><%= notice %>
-    </div>
-    <div class="alert alert-danger" role="alert"><%= alert %>
-  </div>
+    <div class="container p-2">
+      <% if notice%>
+        <div class="alert alert-success" role="alert"><%= notice %>
+        </div>
+      <% end %>
+      <% if alert%>
+        <div class="alert alert-danger" role="alert"><%= alert %>
+        </div>
+      <%end%>
       <%= yield %>
     </div>
   </body>
