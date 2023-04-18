@@ -49,12 +49,26 @@ class RecipeFoodsController < ApplicationController
 
   # DELETE /recipe_foods/1 or /recipe_foods/1.json
   def destroy
-    @recipe_food.destroy
+  @recipe_food.destroy
 
-    respond_to do |format|
-      format.html { redirect_to recipe_foods_url, notice: 'Recipe food was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  respond_to do |format|
+    format.html { redirect_back(fallback_location: recipe_recipe_foods_path(params[:recipe_id]), notice: 'Recipe food was successfully destroyed.') }
+    format.json { head :no_content }
+  end
+  end
+
+  def increment_quantity
+    @recipe_food = RecipeFood.find(params[:id])
+    @recipe_food.quantity += 1
+    @recipe_food.save
+    redirect_back(fallback_location: recipe_recipe_foods_path(params[:recipe_id]))
+  end
+
+  def decrement_quantity
+    @recipe_food = RecipeFood.find(params[:id])
+    @recipe_food.quantity -= 1
+    @recipe_food.save
+    redirect_back(fallback_location: recipe_recipe_foods_path(params[:recipe_id]))
   end
 
   private
@@ -63,15 +77,6 @@ class RecipeFoodsController < ApplicationController
   def set_recipe_food
     @recipe_food = RecipeFood.find(params[:id])
   end
-
-  # Only allow a list of trusted parameters through.
-
-def increment_quantity
-  @recipe_food.increment_quantity
-  @recipe_food.save
-  redirect_to recipe_foods_path, notice: 'Quantity was successfully incremented.'
-end
-
 
   def recipe_food_params
     params.permit(:quantity, :required, :food_id, :recipe_id)
