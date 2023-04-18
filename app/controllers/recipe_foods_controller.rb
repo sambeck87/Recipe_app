@@ -49,12 +49,15 @@ class RecipeFoodsController < ApplicationController
 
   # DELETE /recipe_foods/1 or /recipe_foods/1.json
   def destroy
-  @recipe_food.destroy
+    @recipe_food.destroy
 
-  respond_to do |format|
-    format.html { redirect_back(fallback_location: recipe_recipe_foods_path(params[:recipe_id]), notice: 'Recipe food was successfully destroyed.') }
-    format.json { head :no_content }
-  end
+    respond_to do |format|
+      format.html do
+        redirect_back(fallback_location: recipe_recipe_foods_path(params[:recipe_id]),
+                      notice: 'Recipe food was successfully destroyed.')
+      end
+      format.json { head :no_content }
+    end
   end
 
   def increment_quantity
