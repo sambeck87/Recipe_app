@@ -1,0 +1,18 @@
+<div>
+  <p>
+    <strong>Name:</strong>
+    <%= recipe.name %>
+  </p>
+    <%= button_to "REMOVE", recipe_path(recipe), method: :delete %>
+
+  <p>
+    <strong>Description:</strong>
+    <%= recipe.description %>
+  </p>
+
+  <p>
+    <strong>By:</strong>
+    <%= recipe.user.name %>
+  </p>
+
+</div>

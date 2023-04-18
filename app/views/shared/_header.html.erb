@@ -12,11 +12,15 @@
           <%= link_to "Foods", foods_path, class: "nav-link px-2 text-white" %>
         </li>
         <li>
-          <%= link_to "Recieps", recipes_path, class: "nav-link px-2 text-white" %>
+          <%= link_to "Recipes", recipes_path, class: "nav-link px-2 text-white" %>
         </li>
       </ul>
       <div class="text-end">
-        <button type="button" class="btn btn-outline-light me-2">Login</button>
+      <% if user_signed_in? %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-light me-2" %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light me-2" %>
+      <% end %>
         <button type="button" class="btn btn-warning">Sign-up</button>
       </div>
     </div>
