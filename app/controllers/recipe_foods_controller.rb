@@ -4,6 +4,7 @@ class RecipeFoodsController < ApplicationController
   # GET /recipe_foods or /recipe_foods.json
   def index
     @recipe_foods = RecipeFood.all
+    @foods = Food.where(user_id: current_user.id).order(:name)
   end
 
   # GET /recipe_foods/1 or /recipe_foods/1.json
@@ -23,7 +24,9 @@ class RecipeFoodsController < ApplicationController
 
     respond_to do |format|
       if @recipe_food.save
-        format.html { redirect_to recipe_food_url(@recipe_food), notice: 'Recipe food was successfully created.' }
+        format.html do
+          redirect_to recipe_recipe_foods_path(params[:recipe_id]), notice: 'Recipe food was successfully created.'
+        end
         format.json { render :show, status: :created, location: @recipe_food }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -32,7 +35,6 @@ class RecipeFoodsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /recipe_foods/1 or /recipe_foods/1.json
   def update
     respond_to do |format|
       if @recipe_food.update(recipe_food_params)
@@ -63,7 +65,15 @@ class RecipeFoodsController < ApplicationController
   end
 
   # Only allow a list of trusted parameters through.
+
+def increment_quantity
+  @recipe_food.increment_quantity
+  @recipe_food.save
+  redirect_to recipe_foods_path, notice: 'Quantity was successfully incremented.'
+end
+
+
   def recipe_food_params
-    params.require(:recipe_food).permit(:quantity, :required, :food_id, :recipe_id)
+    params.permit(:quantity, :required, :food_id, :recipe_id)
   end
 end

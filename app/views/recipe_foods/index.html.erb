@@ -1,14 +1,26 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Recipe foods</h1>
+<p>
+  <%= link_to "Back", recipe_path(params[:recipe_id]) %>
+</p>
 
-<div id="recipe_foods">
-  <% @recipe_foods.each do |recipe_food| %>
-    <%= render recipe_food %>
-    <p>
-      <%= link_to "Show this recipe food", recipe_food %>
-    </p>
-  <% end %>
+<div>
+  <p>Params ID: <%= params[:recipe_id] %></p>
 </div>
 
-<%= link_to "New recipe food", new_recipe_food_path %>
+<div id="recipe_foods">
+<% @foods.each do |food| %>
+  <% recipe_food = @recipe_foods.find_by(food_id: food.id, recipe_id: params[:recipe_id]) %>
+  <%= food.name %> <%= recipe_food %><br>
+  <% if recipe_food.nil? %>
+    <%= button_to "Add", recipe_recipe_foods_path(recipe_id: params[:recipe_id], food_id: food.id, quantity: 1), method: :post %>
+  <% else %>
+<%= button_to "+", recipe_recipe_foods_path(recipe_food, recipe_food: { quantity: recipe_food.quantity + 1 }), method: :put %>
+    <%= recipe_food.quantity %>
+    <%= button_to "-", recipe_recipe_foods_path(recipe_food, recipe_food: { quantity: recipe_food.quantity - 1 }), method: :put %>
+  <% end %>
+<% end %>
+</div>
+
+

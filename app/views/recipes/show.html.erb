@@ -5,3 +5,34 @@
 <div>
   <%= link_to "Back to recipes", recipes_path %>
 </div>
+<div>
+<%= button_to "Genrate shopping list", recipe_recipe_foods_path(params[:id]), method: :get %>
+<%= button_to "Add ingredient", recipe_recipe_foods_path(params[:id]), method: :get %>
+<hr>
+
+<table class="table table-dark table-striped">
+      <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Value</th>
+      <th scope="col">Actions</th>
+    </tr>
+      </thead>
+  <tbody>
+
+<% @recipe_foods.each do |recipe_food|%>
+<% food = @foods.find_by(id: recipe_food.food_id)%>
+<%= food.name%>
+<%= recipe_food.quantity%><%= food.measurement_unit%>
+<%= food.price * recipe_food.quantity%>
+    <tr>
+      <th scope="row"><%= food.name%></th>
+      <td><%= recipe_food.quantity%><%= food.measurement_unit%></td>
+      <td><%= food.price * recipe_food.quantity%></td>
+      <td>@mdo</td>
+    </tr>
+<%end%>
+  </tbody>
+
+  </table>
