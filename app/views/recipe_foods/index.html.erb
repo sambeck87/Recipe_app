@@ -12,13 +12,17 @@
 <div id="recipe_foods">
 <% @foods.each do |food| %>
   <% recipe_food = @recipe_foods.find_by(food_id: food.id, recipe_id: params[:recipe_id]) %>
-  <%= food.name %> <%= recipe_food %><br>
+  <%= food.name %>
   <% if recipe_food.nil? %>
     <%= button_to "Add", recipe_recipe_foods_path(recipe_id: params[:recipe_id], food_id: food.id, quantity: 1), method: :post %>
   <% else %>
-<%= button_to "+", recipe_recipe_foods_path(recipe_food, recipe_food: { quantity: recipe_food.quantity + 1 }), method: :put %>
     <%= recipe_food.quantity %>
-    <%= button_to "-", recipe_recipe_foods_path(recipe_food, recipe_food: { quantity: recipe_food.quantity - 1 }), method: :put %>
+<%= button_to "++++", increment_quantity_recipe_recipe_food_path(recipe_food, recipe_food.id, params[:recipe_id]), method: :put %>
+
+<% unless recipe_food.quantity <=0 %>
+<%= button_to "----", decrement_quantity_recipe_recipe_food_path(recipe_food, recipe_food.id, params[:recipe_id]), method: :put %>
+<% end %>
+
   <% end %>
 <% end %>
 </div>
