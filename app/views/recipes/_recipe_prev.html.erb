@@ -1,18 +1,13 @@
-<div>
-  <p>
-    <strong>Name:</strong>
-    <%= recipe.name %>
-  </p>
-    <%= button_to "REMOVE", recipe_path(recipe), method: :delete %>
-
-  <p>
-    <strong>Description:</strong>
-    <%= recipe.description %>
-  </p>
-
-  <p>
-    <strong>By:</strong>
-    <%= recipe.user.name %>
-  </p>
-
+<div class="card text-center">
+  <div class="card-header">
+    <h5 class="card-title"><%= recipe.name %></h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><%= recipe.description %></p>
+    <p><strong>By: <%= recipe.user.name %></strong></p>
+    <% if can? :destroy, recipe %>
+    <%= button_to "REMOVE", recipe_path(recipe), method: :delete, class: "btn btn-danger", type: "button" %>
+    <% end %>
+  </div>
+<%= link_to "Show this recipe", recipe, class: "btn btn-primary" %>
 </div>

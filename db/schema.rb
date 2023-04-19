@@ -27,7 +27,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_185445) do
 
   create_table "recipe_foods", force: :cascade do |t|
     t.integer "quantity", default: 0
-    t.integer "required", default: 0
     t.bigint "food_id", null: false
     t.bigint "recipe_id", null: false
     t.datetime "created_at", null: false
@@ -61,8 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_185445) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "foods", "users"
-  add_foreign_key "recipe_foods", "foods"
-  add_foreign_key "recipe_foods", "recipes"
-  add_foreign_key "recipes", "users"
+  add_foreign_key "foods", "users", on_delete: :cascade
+  add_foreign_key "recipe_foods", "foods", on_delete: :cascade
+  add_foreign_key "recipe_foods", "recipes", on_delete: :cascade
+  add_foreign_key "recipes", "users", on_delete: :cascade
 end

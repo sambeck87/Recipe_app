@@ -27,15 +27,18 @@ class RecipesController < ApplicationController
   # GET /recipes/1 or /recipes/1.json
   def show
     @recipe = Recipe.find(params[:id])
+    @recipe_foods = if @recipe.user_id == current_user.id # check if there is a logged in user
+                      RecipeFood.includes(:recipe).where(recipe_id: @recipe.id)
+                    else
+                      RecipeFood.includes(:recipe, :food).where(recipe_id: @recipe.id)
+                    end
+    @foods = Food.all
   end
 
   # GET /recipes/new
   def new
     @recipe = Recipe.new
   end
-
-  # GET /recipes/1/edit
-  def edit; end
 
   def make_private
     @recipe = Recipe.find(params[:id])
