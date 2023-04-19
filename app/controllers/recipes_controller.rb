@@ -3,11 +3,25 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = current_user.recipe.order(created_at: :desc)
+    @recipes = current_user.recipes.order(created_at: :desc)
   end
 
   def public_recipe
-    @recipes = Recipe.where(public: true)
+    @recipes = Recipe.includes(:user, recipe_foods: :food).where(public: true)
+      .map do |recipe|
+      {
+        recipe_name: recipe.name,
+        food_list: recipe.recipe_foods.map do |recipe_food|
+          {
+            food_name: recipe_food.food.name,
+            quantity: recipe_food.quantity,
+            required: recipe_food.required
+          }
+        end,
+        total_price: recipe.recipe_foods.sum { |recipe_food| recipe_food.food.price * recipe_food.quantity },
+        user_name: recipe.user.name
+      }
+    end
   end
 
   # GET /recipes/1 or /recipes/1.json

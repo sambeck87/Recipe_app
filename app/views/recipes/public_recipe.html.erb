@@ -1,12 +1,23 @@
-<div class="container d-flex justify-content-center w-50">
-  <h1 class="justify-content-center">Public Recipe</h1>
-  <div style="display: none">
-    <div class="d-flex flex-column gap-2">
-      <% @recipes.each do |recipe| %>
-        <div class="border">
-          <h3> <%= recipe %> </h3>
-        </div>
-      <%end%>
+<div class="container w-50">
+  <div>
+    <h1 class="justify-content-center mb-4">Public Recipe</h1>
+    <div class="">
+      <div class="">
+        <% @recipes.each do |recipe| %>
+          <div class="border d-flex justify-content-between p-3 m-2">
+            <div class="">
+              <h3> <%= recipe[:recipe_name] %> </h3>
+              <h5> By: <%= recipe[:user_name] %>
+              </h5>
+            </div>
+            <div>
+              <h3>Total Food Items: <%= recipe[:food_list].length %>  </h3>
+              <h5> Total Price: $ <%= recipe[:total_price] %>
+              </h5>
+            </div>
+          </div>
+        <%end%>
+      </div>
     </div>
   </div>
 </div>
