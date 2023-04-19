@@ -4,21 +4,26 @@ class RecipeFoodsController < ApplicationController
   # GET /recipe_foods or /recipe_foods.json
   def index
     @recipe_foods = RecipeFood.all
-    @foods = Food.where(user_id: current_user.id).order(:name)
   end
 
+  # GET /recipe_foods/1 or /recipe_foods/1.json
+  def show; end
+
+  # GET /recipe_foods/new
   def new
     @recipe_food = RecipeFood.new
   end
 
+  # GET /recipe_foods/1/edit
+  def edit; end
+
+  # POST /recipe_foods or /recipe_foods.json
   def create
     @recipe_food = RecipeFood.new(recipe_food_params)
 
     respond_to do |format|
       if @recipe_food.save
-        format.html do
-          redirect_to recipe_recipe_foods_path(params[:recipe_id]), notice: 'Recipe food was successfully created.'
-        end
+        format.html { redirect_to recipe_food_url(@recipe_food), notice: 'Recipe food was successfully created.' }
         format.json { render :show, status: :created, location: @recipe_food }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -27,6 +32,7 @@ class RecipeFoodsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /recipe_foods/1 or /recipe_foods/1.json
   def update
     respond_to do |format|
       if @recipe_food.update(recipe_food_params)
@@ -44,26 +50,9 @@ class RecipeFoodsController < ApplicationController
     @recipe_food.destroy
 
     respond_to do |format|
-      format.html do
-        redirect_back(fallback_location: recipe_recipe_foods_path(params[:recipe_id]),
-                      notice: 'Recipe food was successfully destroyed.')
-      end
+      format.html { redirect_to recipe_foods_url, notice: 'Recipe food was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def increment_quantity
-    @recipe_food = RecipeFood.find(params[:id])
-    @recipe_food.quantity += 1
-    @recipe_food.save
-    redirect_back(fallback_location: recipe_recipe_foods_path(params[:recipe_id]))
-  end
-
-  def decrement_quantity
-    @recipe_food = RecipeFood.find(params[:id])
-    @recipe_food.quantity -= 1
-    @recipe_food.save
-    redirect_back(fallback_location: recipe_recipe_foods_path(params[:recipe_id]))
   end
 
   private
@@ -73,7 +62,8 @@ class RecipeFoodsController < ApplicationController
     @recipe_food = RecipeFood.find(params[:id])
   end
 
+  # Only allow a list of trusted parameters through.
   def recipe_food_params
-    params.permit(:quantity, :food_id, :recipe_id)
+    params.require(:recipe_food).permit(:quantity, :required, :food_id, :recipe_id)
   end
 end
