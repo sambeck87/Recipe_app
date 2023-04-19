@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.includes([:user]).all.order(created_at: :desc)
+    @recipes = current_user.recipes.order(created_at: :desc)
   end
 
   # GET /recipes/1 or /recipes/1.json
