@@ -1,14 +1,37 @@
 <p style="color: green"><%= notice %></p>
 
+<div class="d-flex justify-content-between">
 <h1>Recipe foods</h1>
-
-<div id="recipe_foods">
-  <% @recipe_foods.each do |recipe_food| %>
-    <%= render recipe_food %>
-    <p>
-      <%= link_to "Show this recipe food", recipe_food %>
-    </p>
-  <% end %>
+<%= link_to "Done", recipe_path(params[:recipe_id]), class: "btn btn-warning my-2" %>
 </div>
 
-<%= link_to "New recipe food", new_recipe_food_path %>
+<table class="table table-dark table-striped">
+      <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col" class= "d-flex justify-content-around">Quantity</th>
+    </tr>
+      </thead>
+  <tbody>
+
+<% @foods.each do |food|%>
+<% recipe_food = @recipe_foods.find_by(food_id: food.id, recipe_id: params[:recipe_id]) %>
+    <tr>
+      <th scope="row"><%= food.name%></th>
+      <td class="d-flex justify-content-around">
+      <% if recipe_food.nil? %>
+      <%= button_to "Add", recipe_recipe_foods_path(recipe_id: params[:recipe_id], food_id: food.id, quantity: 1), method: :post %>
+      <% else %>
+      <%= button_to " - ", decrement_quantity_recipe_recipe_food_path(recipe_food, recipe_food.id, params[:recipe_id]), method: :put, class: "mx-3" %>
+      <%= "#{recipe_food.quantity} #{food.measurement_unit}" %>
+      <% unless recipe_food.quantity <=0 %>
+        <%= button_to " + ", increment_quantity_recipe_recipe_food_path(recipe_food, recipe_food.id, params[:recipe_id]), method: :put, class: "mx-3" %>
+      <% end %>
+      <% end %>
+      </td>
+    </tr>
+<%end%>
+  </tbody>
+  </table>
+
+

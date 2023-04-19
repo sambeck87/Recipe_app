@@ -3,5 +3,36 @@
 <%= render @recipe %>
 
 <div>
-  <%= link_to "Back to recipes", recipes_path %>
+  <%= link_to "Back to recipes", recipes_path, class: "btn btn-secondary" %>
+</div><br>
+<div class="d-flex justify-content-between">
+<%= button_to "Genrate shopping list", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-primary", type: "button" %>
+<%= button_to "Add ingredient", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-warning", type: "button" %>
 </div>
+<hr>
+
+<table class="table table-dark table-striped">
+      <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Value</th>
+      <th scope="col" class="d-flex justify-content-around">Actions</th>
+    </tr>
+      </thead>
+  <tbody>
+
+<% @recipe_foods.each do |recipe_food|%>
+<% food = @foods.find_by(id: recipe_food.food_id)%>
+    <tr>
+      <th scope="row"><%= food.name%></th>
+      <td><%= "#{recipe_food.quantity} #{food.measurement_unit}" %></td>
+      <td>US$ <%= food.price * recipe_food.quantity%></td>
+      <td class="d-flex justify-content-evenly">
+      <%= button_to "Modify", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-primary", type: "button" %>
+      <%= button_to "Remove", recipe_recipe_food_path(params[:id], recipe_food.id), method: :delete, class: "btn btn-danger", type: "button" %>
+      </td>
+    </tr>
+<%end%>
+  </tbody>
+  </table>
