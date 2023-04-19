@@ -6,6 +6,8 @@
 
 <div id="recipes">
   <% @recipes.each do |recipe| %>
+  <% if can? :read, recipe %>
     <%= render 'recipe_prev', recipe: recipe %>
+    <%end%>
   <% end %>
 </div>

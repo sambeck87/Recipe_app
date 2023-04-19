@@ -1,5 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
+<% if can? :create, @recipe %>
 <div class="d-flex justify-content-between">
 <h1>Recipe foods</h1>
 <%= link_to "Done", recipe_path(params[:recipe_id]), class: "btn btn-warning my-2" %>
@@ -22,16 +23,15 @@
       <% if recipe_food.nil? %>
       <%= button_to "Add", recipe_recipe_foods_path(recipe_id: params[:recipe_id], food_id: food.id, quantity: 1), method: :post %>
       <% else %>
-      <%= button_to " - ", decrement_quantity_recipe_recipe_food_path(recipe_food, recipe_food.id, params[:recipe_id]), method: :put, class: "mx-3" %>
-      <%= "#{recipe_food.quantity} #{food.measurement_unit}" %>
       <% unless recipe_food.quantity <=0 %>
-        <%= button_to " + ", increment_quantity_recipe_recipe_food_path(recipe_food, recipe_food.id, params[:recipe_id]), method: :put, class: "mx-3" %>
+        <%= button_to " - ", decrement_quantity_recipe_recipe_food_path(recipe_food, recipe_food.id, params[:recipe_id]), method: :put, class: "mx-3" %>
       <% end %>
+      <%= "#{recipe_food.quantity} #{food.measurement_unit}" %>
+      <%= button_to " + ", increment_quantity_recipe_recipe_food_path(recipe_food, recipe_food.id, params[:recipe_id]), method: :put, class: "mx-3" %>
       <% end %>
       </td>
     </tr>
 <%end%>
   </tbody>
   </table>
-
-
+<% end %>

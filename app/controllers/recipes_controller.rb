@@ -13,7 +13,11 @@ class RecipesController < ApplicationController
   # GET /recipes/1 or /recipes/1.json
   def show
     @recipe = Recipe.find(params[:id])
-    @recipe_foods = RecipeFood.where(recipe_id: @recipe.id)
+    @recipe_foods = if @recipe.user_id == current_user.id # check if there is a logged in user
+                      RecipeFood.includes(:recipe).where(recipe_id: @recipe.id)
+                    else
+                      RecipeFood.includes(:recipe, :food).where(recipe_id: @recipe.id)
+                    end
     @foods = Food.all
   end
 

@@ -5,6 +5,7 @@ class RecipeFoodsController < ApplicationController
   def index
     @recipe_foods = RecipeFood.all
     @foods = Food.where(user_id: current_user.id).order(:name)
+    @recipe = Recipe.find(params[:recipe_id])
   end
 
   def new
