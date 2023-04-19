@@ -7,18 +7,10 @@ class RecipeFoodsController < ApplicationController
     @foods = Food.where(user_id: current_user.id).order(:name)
   end
 
-  # GET /recipe_foods/1 or /recipe_foods/1.json
-  def show; end
-
-  # GET /recipe_foods/new
   def new
     @recipe_food = RecipeFood.new
   end
 
-  # GET /recipe_foods/1/edit
-  def edit; end
-
-  # POST /recipe_foods or /recipe_foods.json
   def create
     @recipe_food = RecipeFood.new(recipe_food_params)
 
@@ -82,6 +74,6 @@ class RecipeFoodsController < ApplicationController
   end
 
   def recipe_food_params
-    params.permit(:quantity, :required, :food_id, :recipe_id)
+    params.permit(:quantity, :food_id, :recipe_id)
   end
 end
