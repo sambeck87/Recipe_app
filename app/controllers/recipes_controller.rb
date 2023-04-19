@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = current_user.recipe.order(created_at: :desc)
+    @recipes = current_user.recipes.order(created_at: :desc)
   end
 
   # GET /recipes/1 or /recipes/1.json
@@ -17,9 +17,6 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
   end
-
-  # GET /recipes/1/edit
-  def edit; end
 
   def make_private
     @recipe = Recipe.find(params[:id])
