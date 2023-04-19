@@ -1,5 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
+<% if can? :create, @recipe %>
 <div class="d-flex justify-content-between">
 <h1>Recipe foods</h1>
 <%= link_to "Done", recipe_path(params[:recipe_id]), class: "btn btn-warning my-2" %>
@@ -33,5 +34,4 @@
 <%end%>
   </tbody>
   </table>
-
-
+<% end %>
