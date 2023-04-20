@@ -12,8 +12,10 @@
             </div>
             <div>
               <p>Total Food Items: <%= recipe[:food_list].length %>  </p>
-              <p> Total Price: $ <%= recipe[:total_price] %>
+              <p>recipe
+                Total Price: $ <%= recipe[:total_price] %>
               </p>
+              <%= link_to "Detail", public_recipe_path(recipe[:recipe_id]) %>
             </div>
           </div>
         <%end%>
