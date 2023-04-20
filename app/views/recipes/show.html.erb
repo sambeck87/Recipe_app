@@ -7,7 +7,7 @@
 </div><br>
 <% if can? :create, @recipe %>
 <div class="d-flex justify-content-between">
-<%= button_to "Genrate shopping list", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-primary", type: "button" %>
+<%= button_to "Generate shopping list", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-primary", type: "button" %>
 <%= button_to "Add ingredient", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-warning", type: "button" %>
 </div>
 <% end %>

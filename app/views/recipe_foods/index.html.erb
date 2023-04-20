@@ -21,7 +21,7 @@
       <th scope="row"><%= food.name%></th>
       <td class="d-flex justify-content-around">
       <% if recipe_food.nil? %>
-      <%= button_to "Add", recipe_recipe_foods_path(recipe_id: params[:recipe_id], food_id: food.id, quantity: 1), method: :post %>
+      <%= button_to "Add", recipe_recipe_foods_path(recipe_id: params[:recipe_id], food_id: food.id, quantity: 1), method: :post, class:"btn btn-primary" %>
       <% else %>
       <% unless recipe_food.quantity <=0 %>
         <%= button_to " - ", decrement_quantity_recipe_recipe_food_path(recipe_food, recipe_food.id, params[:recipe_id]), method: :put, class: "mx-3" %>
