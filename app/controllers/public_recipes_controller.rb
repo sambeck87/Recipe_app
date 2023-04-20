@@ -11,7 +11,6 @@ class PublicRecipesController < ApplicationController
           {
             food_name: recipe_food.food.name,
             quantity: recipe_food.quantity,
-            required: recipe_food.required
           }
         end,
         total_price: recipe.recipe_foods.sum { |recipe_food| recipe_food.food.price * recipe_food.quantity },

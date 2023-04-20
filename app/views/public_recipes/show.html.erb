@@ -31,7 +31,7 @@
         <% @recipe_foods.each do |recipe_food|%>
           <tr>
             <th scope="row"><%= recipe_food.food.name%></th>
-            <td><%= "#{recipe_food.food.quantity} #{recipe_food.food.measurement_unit}" %></td>
+            <td><%= "#{recipe_food.quantity} #{recipe_food.food.measurement_unit}" %></td>
             <td>US$ <%= recipe_food.food.price * recipe_food.quantity%></td>
           </tr>
         <%end%>
