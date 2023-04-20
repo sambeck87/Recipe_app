@@ -27,6 +27,7 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
 
+    can %i[read create update destroy], Food, user_id: user.id
     can %i[read create destroy], Recipe, user_id: user.id
     can %i[create update destroy], RecipeFood, food: { user_id: user.id }
     can %i[create update destroy], RecipeFood, recipe: { user_id: user.id }
