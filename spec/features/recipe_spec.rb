@@ -5,8 +5,10 @@ RSpec.describe 'Recipes', type: :feature do
   before :each do
     @first_user = User.create!(name: 'sambeck', email: 'sambeck@outlook.com', password: 'todoterreno')
     login_as(@first_user, scope: :user)
-    @recipe = Recipe.create!(name: 'My new recipe', preparation_time: 1, cooking_time: 1, description: 'My sauce recipe', public: true, user: @first_user)
-    @recipe2 = Recipe.create!(name: 'My last recipe', preparation_time: 2, cooking_time: 3, description: 'My delicious recipe', public: true, user: @first_user)
+    @recipe = Recipe.create!(name: 'My new recipe', preparation_time: 1, cooking_time: 1,
+                             description: 'My sauce recipe', public: true, user: @first_user)
+    @recipe2 = Recipe.create!(name: 'My last recipe', preparation_time: 2, cooking_time: 3,
+                              description: 'My delicious recipe', public: true, user: @first_user)
 
     visit recipes_path
     @recipe1_url = "#{recipes_path}/#{@recipe.id}"
@@ -101,7 +103,7 @@ RSpec.describe 'Recipes', type: :feature do
     context 'Test the Back to recipes button' do
       it 'The Back to recipes button should redirect to the recipes page' do
         click_link 'Back to recipes'
-        expect(current_path).to eq("#{recipes_path}")
+        expect(current_path).to eq(recipes_path.to_s)
       end
     end
   end

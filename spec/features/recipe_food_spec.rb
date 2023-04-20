@@ -5,7 +5,8 @@ RSpec.describe 'Recipes', type: :feature do
   before :each do
     @first_user = User.create!(name: 'sambeck', email: 'sambeck@outlook.com', password: 'todoterreno')
     login_as(@first_user, scope: :user)
-    @recipe = Recipe.create!(name: 'My new recipe', preparation_time: 1, cooking_time: 1, description: 'My sauce recipe', public: true, user: @first_user)
+    @recipe = Recipe.create!(name: 'My new recipe', preparation_time: 1, cooking_time: 1,
+                             description: 'My sauce recipe', public: true, user: @first_user)
     @food1 = Food.create!(name: 'butter', measurement_unit: 'lb', price: 1.3, quantity: 3, user: @first_user)
     @food2 = Food.create!(name: 'cocoa', measurement_unit: 'spoon', price: 0.1, quantity: 100, user: @first_user)
     @food3 = Food.create!(name: 'egg', measurement_unit: 'piece', price: 0.5, quantity: 15, user: @first_user)
@@ -65,8 +66,8 @@ RSpec.describe 'Recipes', type: :feature do
       end
 
       it 'The quantity should be "3" after push the increment button(+) twice' do
-          click_button '+'
-          click_button '+'
+        click_button '+'
+        click_button '+'
         expect(page).to have_content(3)
       end
     end
