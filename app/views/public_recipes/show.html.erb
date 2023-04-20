@@ -1,0 +1,45 @@
+<div class="container d-flex flex-column w-75">
+  <div class="m-2 d-flex">
+    <%= link_to "Back to recipes", public_recipes_path, class: "btn btn-sm btn-secondary" %>
+  </div>
+  <div class="d-flex flex-column gap-3">
+    <h4 class="d-flex justify-content-center">
+      <%= @recipe.name%>
+    </h4>
+    <hr>
+    <h5>
+      Prepared By: <%= @recipe.user.name %>
+    </h5>
+    <h5>
+      Preparation Time: <%= @recipe.preparation_time %>
+    </h5>
+    <h5>
+      Cooking Time: <%= @recipe.cooking_time %>
+    </h5>
+    <p><span class="fw-bold">Description:</span> <%= @recipe.description %> </p>
+  </div>
+  <% if @recipe_foods.length >0 %>
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Food</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recipe_foods.each do |recipe_food|%>
+          <tr>
+            <th scope="row"><%= recipe_food.food.name%></th>
+            <td><%= "#{recipe_food.food.quantity} #{recipe_food.food.measurement_unit}" %></td>
+            <td>US$ <%= recipe_food.food.price * recipe_food.quantity%></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="d-flex justify-content-center" >
+      <h5>No Food Available</h5>
+    </div>
+  <%end%>
+</div>

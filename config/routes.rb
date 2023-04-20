@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'foods#index'
-  get '/public_recipe', to:'recipes#public_recipe'
+  resources :public_recipes, controller: 'public_recipes'
   resources :recipe_foods
 
   resources :foods

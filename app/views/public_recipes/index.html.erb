@@ -1,0 +1,25 @@
+<div class="container w-50">
+  <div>
+    <h1 class="justify-content-center mb-4">Public Recipe</h1>
+    <div class="">
+      <div class="">
+        <% @recipes.each do |recipe| %>
+          <div class="border d-flex justify-content-between p-3 m-2">
+            <div class="">
+              <h3> <%= recipe[:recipe_name] %> </h3>
+              <h5> By: <%= recipe[:user_name] %>
+              </h5>
+            </div>
+            <div>
+              <p>Total Food Items: <%= recipe[:food_list].length %>  </p>
+              <p>recipe
+                Total Price: $ <%= recipe[:total_price] %>
+              </p>
+              <%= link_to "Detail", public_recipe_path(recipe[:recipe_id]) %>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
