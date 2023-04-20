@@ -1,46 +1,43 @@
 <p style="color: green"><%= notice %></p>
-
 <%= render @recipe %>
-
 <div>
   <%= link_to "Back to recipes", recipes_path, class: "btn btn-secondary" %>
-</div><br>
-<% if can? :create, @recipe %>
-<div class="d-flex justify-content-between">
-<%= button_to "Genrate shopping list", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-primary", type: "button" %>
-<%= button_to "Add ingredient", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-warning", type: "button" %>
 </div>
+<br>
+<% if can? :create, @recipe %>
+  <div class="d-flex justify-content-between">
+    <%= link_to "Generate shopping List", general_shopping_list_index_path, class: "btn btn-primary", type: "button" %>
+    <%= button_to "Add ingredient", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-warning", type: "button" %>
+  </div>
 <% end %>
 <hr>
-
 <table class="table table-dark table-striped">
-      <thead>
+  <thead>
     <tr>
       <th scope="col">Food</th>
       <th scope="col">Quantity</th>
       <th scope="col">Value</th>
       <% if can? :destroy, @recipe %>
-      <th scope="col" class="d-flex justify-content-around">Actions</th>
+        <th scope="col" class="d-flex justify-content-around">Actions</th>
       <% end %>
     </tr>
-      </thead>
+  </thead>
   <tbody>
-
-<% @recipe_foods.each do |recipe_food|%>
-<% food = @foods.find_by(id: recipe_food.food_id)%>
-    <tr>
-      <th scope="row"><%= food.name%></th>
-      <td><%= "#{recipe_food.quantity} #{food.measurement_unit}" %></td>
-      <td>US$ <%= food.price * recipe_food.quantity%></td>
-      <% if can? :update, recipe_food %>
-      <td class="d-flex justify-content-evenly">
-      <%= button_to "Modify", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-primary", type: "button" %>
-      <% end %>
-      <% if can? :destroy, recipe_food %>
-      <%= button_to "Remove", recipe_recipe_food_path(params[:id], recipe_food.id), method: :delete, class: "btn btn-danger", type: "button" %>
-      </td>
-      <% end %>
-    </tr>
-<%end%>
+    <% @recipe_foods.each do |recipe_food|%>
+      <% food = @foods.find_by(id: recipe_food.food_id)%>
+      <tr>
+        <th scope="row"><%= food.name%></th>
+        <td><%= "#{recipe_food.quantity} #{food.measurement_unit}" %></td>
+        <td>US$ <%= food.price * recipe_food.quantity%></td>
+        <% if can? :update, recipe_food %>
+          <td class="d-flex justify-content-evenly">
+            <%= button_to "Modify", recipe_recipe_foods_path(params[:id]), method: :get, class: "btn btn-primary", type: "button" %>
+          <% end %>
+          <% if can? :destroy, recipe_food %>
+            <%= button_to "Remove", recipe_recipe_food_path(params[:id], recipe_food.id), method: :delete, class: "btn btn-danger", type: "button" %>
+          </td>
+        <% end %>
+      </tr>
+    <%end%>
   </tbody>
-  </table>
+</table>

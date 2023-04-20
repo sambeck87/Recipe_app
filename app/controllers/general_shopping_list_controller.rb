@@ -1,8 +1,7 @@
 class GeneralShoppingListController < ApplicationController
   def index
-    @foods = Food.includes(:recipe_foods).where(user_id: current_user.id)
     @missing_ingredients = []
-    @foods.each do |food|
+    current_user_foods.each do |food|
       total_quantity = 0
       food.recipe_foods.each do |recipe_food|
         total_quantity += recipe_food.quantity
@@ -18,5 +17,11 @@ class GeneralShoppingListController < ApplicationController
       }
     end
     @total_price = @missing_ingredients.map { |missing_ingredient| missing_ingredient[:price] }.sum
+  end
+
+  private
+
+  def current_user_foods
+    Food.includes(:recipe_foods).where(user_id: current_user.id)
   end
 end
