@@ -89,11 +89,14 @@ RSpec.describe RecipesController, type: :request do
 
   describe 'DELETE #destroy' do
     before do
-      get recipe_path(@recipe.id)
+      delete recipe_path(@recipe)
     end
 
     it 'returns a successful response' do
-      expect(response).to be_successful
+      expect(response).to redirect_to(recipes_url)
+    end
+    it 'should display the message "Recipe was successfully destroyed."' do
+      expect(flash[:notice]).to eq('Recipe was successfully destroyed.')
     end
   end
 end
