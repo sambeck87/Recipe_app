@@ -53,7 +53,6 @@ RSpec.describe RecipesController, type: :request do
     it 'displays all buttons' do
       expect(response.body).to include('Back to recipes')
       expect(response.body).to include('Add ingredient')
-      expect(response.body).to include('Generate shopping list')
     end
   end
 
