@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
+
   # POST /users or /users.json
   def create
     @user = User.new(user_params)

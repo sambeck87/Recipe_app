@@ -6,8 +6,9 @@ RSpec.describe RecipeFoodsController, type: :request do
   before do
     @first_user = User.create!(name: 'sambeck', email: 'sambeck@outlook.com', password: 'todoterreno')
     login_as(@first_user, scope: :user)
-    @recipe = Recipe.create!(name: 'New recipe', preparation_time: 1, cooking_time: 1, description: 'My sauce recipe', public: true, user: @first_user)
-    @food = Food.create!(name: 'chilli', measurement_unit: "piece", price: 1, user_id: @first_user.id)
+    @recipe = Recipe.create!(name: 'New recipe', preparation_time: 1, cooking_time: 1, description: 'My sauce recipe',
+                             public: true, user: @first_user)
+    @food = Food.create!(name: 'chilli', measurement_unit: 'piece', price: 1, user_id: @first_user.id)
     @recipe_food = RecipeFood.create!(food_id: @food.id, recipe_id: @recipe.id)
   end
 
@@ -63,14 +64,13 @@ RSpec.describe RecipeFoodsController, type: :request do
     end
   end
 
-describe 'DELETE #destroy' do
-  before do
-    delete recipe_recipe_food_path(@recipe.id, @recipe_food.id)
-  end
+  describe 'DELETE #destroy' do
+    before do
+      delete recipe_recipe_food_path(@recipe.id, @recipe_food.id)
+    end
 
-  it 'returns a successful response' do
-    expect(response).to have_http_status(:redirect)
+    it 'returns a successful response' do
+      expect(response).to have_http_status(:redirect)
+    end
   end
-end
-
 end

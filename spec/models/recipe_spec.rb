@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe Recipe, type: :model do
   subject do
     @user = User.new(name: 'sambeck', email: 'sambeck@outlook.com', encrypted_password: 'todoterreno')
-    Recipe.new(name: 'sauce', preparation_time: 1, cooking_time: 1, description: 'my sauce recipe', public: true, user_id: @user.id)
+    Recipe.new(name: 'sauce', preparation_time: 1, cooking_time: 1, description: 'my sauce recipe', public: true,
+               user_id: @user.id)
   end
 
   before { subject.save }

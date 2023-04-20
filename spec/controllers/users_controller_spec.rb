@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :request do
-    include Warden::Test::Helpers
+  include Warden::Test::Helpers
 
-    before do
+  before do
     @first_user = User.create!(name: 'sambeck', email: 'sambeck@outlook.com', password: 'todoterreno')
     login_as(@first_user, scope: :user)
   end

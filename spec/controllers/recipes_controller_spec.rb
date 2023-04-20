@@ -6,7 +6,8 @@ RSpec.describe RecipesController, type: :request do
   before do
     @first_user = User.create!(name: 'sambeck', email: 'sambeck@outlook.com', password: 'todoterreno')
     login_as(@first_user, scope: :user)
-    @recipe = Recipe.create!(name: 'New recipe', preparation_time: 1, cooking_time: 1, description: 'My sauce recipe', public: true, user: @first_user)
+    @recipe = Recipe.create!(name: 'New recipe', preparation_time: 1, cooking_time: 1, description: 'My sauce recipe',
+                             public: true, user: @first_user)
   end
 
   describe 'GET #index' do
