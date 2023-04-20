@@ -1,0 +1,35 @@
+<div id="<%= dom_id recipe %>">
+<div>
+  <h2 class="d-flex justify-content-around">
+    <%= recipe.name %>
+  </h2>
+
+  <% if current_user && recipe.user == current_user %>
+  <% if recipe.public %>
+    <%= button_to "Public", make_private_recipe_path(recipe), method: :put, class: "btn btn-success", type: "button" %>
+  <% else %>
+    <%= button_to "Private", make_private_recipe_path(recipe), method: :put, class: "btn btn-danger", type: "button" %>
+  <% end %>
+<% end %>
+</div>
+  <p>
+    <strong>Preparation time:</strong>
+    <%= "#{recipe.preparation_time} Hrs" %>
+  </p>
+
+  <p>
+    <strong>Cooking time:</strong>
+    <%= "#{recipe.cooking_time} Hrs" %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= recipe.description %>
+  </p>
+
+  <p>
+    <strong>By:</strong>
+    <%= recipe.user.name %>
+  </p>
+
+</div>

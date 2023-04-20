@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+<div class="d-flex justify-content-between">
+<h1>Recipes</h1>
+<%= link_to "New recipe", new_recipe_path, class:"btn btn-warning my-2" %>
+</div>
+
+<div id="recipes">
+  <% @recipes.each do |recipe| %>
+  <% if can? :read, recipe %>
+    <%= render 'recipe_prev', recipe: recipe %>
+    <%end%>
+  <% end %>
+</div>

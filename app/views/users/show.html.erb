@@ -1,0 +1,7 @@
+<p style="color: green"><%= notice %></p>
+
+<h3 class="d-flex justify-content-around my-5"> Are you sure <%= @user.name %>? <h3>
+
+<div class="d-flex justify-content-around">
+  <%= button_to "Logout", @user, method: :delete %>
+</div>

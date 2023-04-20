@@ -1,0 +1,30 @@
+<header class="p-3 bg-dark text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <% if current_user %>
+          <li>
+            <%= link_to "Home", root_path, class: "nav-link px-2 text-white" %>
+          </li>
+          <li>
+            <%= link_to "Foods", foods_path, class: "nav-link px-2 text-white" %>
+          </li>
+          <li>
+            <%= link_to "Recipes", recipes_path, class: "nav-link px-2 text-white" %>
+          </li>
+        <%end%>
+        <li>
+          <%= link_to "Public Recipes", public_recipes_path, class: "nav-link px-2 text-white" %>
+        </li>
+      </ul>
+      <div class="text-end">
+        <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-light me-2" %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light me-2" %>
+          <%= link_to "Sign-up", new_user_registration_path, class: "btn btn-warning me-2" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</header>
