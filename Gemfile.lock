@@ -305,6 +305,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  warden
   web-console
   webdrivers
 
