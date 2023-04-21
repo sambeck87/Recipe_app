@@ -27,7 +27,18 @@ Rails.application.configure do
   config.server_timing = true
 
   # Configure host
+  # email configuration
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    address:              'smtp-relay.sendinblue.com',
+    port:                 587,
+    user_name:            'microverstests@gmail.com',
+    password:             '3XpUFO7I5RhAj4a8',
+    authentication:       'login',
+    enable_starttls_auto: true
+  }
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
