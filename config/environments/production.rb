@@ -21,11 +21,20 @@ Rails.application.configure do
   # config.require_master_key = true
 
   # Configure host
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+config.action_mailer.default_url_options = { host: 'https://my-recipes-jx0z.onrender.com', protocol: 'https' }
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+    address:              'smtp-relay.sendinblue.com',
+    port:                 587,
+    user_name:            'microverstests@gmail.com',
+    password:             '3XpUFO7I5RhAj4a8',
+    authentication:       'login',
+    enable_starttls_auto: true
+}
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present? || ENV['RENDER'].present?
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
