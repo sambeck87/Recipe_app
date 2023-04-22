@@ -27,7 +27,7 @@ config.action_mailer.smtp_settings = {
     address:              'smtp-relay.sendinblue.com',
     port:                 587,
     user_name:            'microverstests@gmail.com',
-    password:             'xsmtpsib-2c5ab0e55207581500f7067b057aff69532cd099c1734752091d9a5a73b2803a-0zsn2pKgPbGJR1Cj',
+    password:             '3XpUFO7I5RhAj4a8',
     authentication:       'login',
     enable_starttls_auto: true
 }
