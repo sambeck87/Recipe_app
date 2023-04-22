@@ -31,7 +31,6 @@ config.action_mailer.smtp_settings = {
     authentication:       'login',
     enable_starttls_auto: true
 }
-
   # cooment
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
